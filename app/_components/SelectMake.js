@@ -14,7 +14,7 @@ export default function SelectMake({ selectedMake, setSelectedMake ,vehicles}) {
         <option value="" className="text-black w-64">
           --Select make--
         </option>
-        {vehicles.map((make) => (
+        {vehicles?.map((make) => (
           <option
             key={make.MakeId}
             className="text-black w-full"

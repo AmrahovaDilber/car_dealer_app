@@ -12,7 +12,7 @@ export default function SelectYear({years,selectedYear,setSelectedYear}) {
       className="w-64 p-2 border border-gray-300 rounded"
     >
       <option value="">--Select year--</option>
-      {years.map((year) => (
+      {years?.map((year) => (
         <option key={year} value={year}>
           {year}
         </option>

@@ -1,9 +1,9 @@
-"use client";
-import { Suspense } from "react";
-import { useEffect, useState } from "react";
-import { fetchVehicle } from "../_services/api";
-import LoadingSpinner from "./LoadingSpinner";
-
+'use client';
+import { Suspense } from 'react';
+import { useEffect, useState } from 'react';
+import { fetchModel, fetchVehicle } from '../_services/api';
+import LoadingSpinner from './LoadingSpinner';
+import ModelNames from './ModelNames';
 
 export default function ResultPageClient({ selectedMake, selectedYear }) {
   const [filteredData, setFilteredData] = useState([]);
@@ -18,22 +18,12 @@ export default function ResultPageClient({ selectedMake, selectedYear }) {
         const make = data.find((item) => item.MakeName === selectedMake);
 
         if (!make) {
-          throw new Error("Vehicle make not found");
+          throw new Error('Vehicle make not found');
         }
-        const modelsResponse = await fetch(
-          `https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeIdYear/makeId/${make.MakeId}/modelyear/${selectedYear}?format=json`
-        );
-        const modelsData = await modelsResponse.json();
-
-        if (modelsResponse.ok) {
-          setFilteredData(modelsData.Results || []);
-        } else {
-          throw new Error(
-            modelsData.Message || "Failed to fetch vehicle models"
-          );
-        }
+        const modelsData = await fetchModel(make.MakeId, selectedYear);
+        setFilteredData(modelsData);
       } catch (err) {
-        setError(err.message || "An error occurred");
+        setError(err.message || 'An error occurred');
       } finally {
         setLoading(false);
       }
@@ -60,16 +50,7 @@ export default function ResultPageClient({ selectedMake, selectedYear }) {
         <h1 className="text-3xl font-bold mb-4">
           Vehicle Models for {selectedMake} ({selectedYear})
         </h1>
-        <ul className="space-y-2">
-          {filteredData.map((model) => (
-            <li
-              key={model.Model_ID}
-              className="p-4 bg-white border border-gray-300 rounded shadow"
-            >
-              {model.Model_Name}
-            </li>
-          ))}
-        </ul>
+        <ModelNames filteredData={filteredData}></ModelNames>
       </div>
     </Suspense>
   );

@@ -2,9 +2,6 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export async function fetchData(url) {
   try {
-    if (!url) {
-      throw new Error('URL is required');
-    }
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

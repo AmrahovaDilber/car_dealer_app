@@ -11,7 +11,7 @@ export default function ResultPageClient({ selectedMake, selectedYear }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchDataVehicle() {
       try {
         setLoading(true);
         const data = await fetchVehicle();
@@ -29,7 +29,7 @@ export default function ResultPageClient({ selectedMake, selectedYear }) {
       }
     }
 
-    fetchData();
+    fetchDataVehicle();
   }, [selectedMake, selectedYear]);
 
   if (loading) {

@@ -38,7 +38,7 @@ import dynamic from "next/dynamic";
         setSelectedYear={setSelectedYear}
         years={years}
       ></SelectYear>
-      <Link href={`/pages/Result/${selectedMake}/${selectedYear}`} passHref>
+      <Link href={`/pages/Result/${selectedMake}/${selectedYear}`} >
         <button
           disabled={!selectedMake || !selectedYear}
           className={`px-6 py-2 font-bold rounded ${

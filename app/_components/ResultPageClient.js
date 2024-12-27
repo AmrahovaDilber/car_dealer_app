@@ -1,9 +1,9 @@
 'use client';
 import { Suspense } from 'react';
 import { useEffect, useState } from 'react';
-import { fetchModel, fetchVehicle } from '../_services/api';
-import LoadingSpinner from './LoadingSpinner';
-import ModelNames from './ModelNames';
+import { fetchModel, fetchVehicle } from '@/app/_services/api'
+import LoadingSpinner from '@/app/_components/LoadingSpinner'
+import ModelNames from '@/app/_components/ModelNames';
 
 export default function ResultPageClient({ selectedMake, selectedYear }) {
   const [filteredData, setFilteredData] = useState([]);
